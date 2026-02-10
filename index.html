@@ -523,16 +523,16 @@
         <div class="about-content">
             <div class="about-text">
                 <p>
-                    I'm a passionate developer with a focus on creating efficient, scalable, and user-friendly applications. 
-                    With years of experience in the field, I've worked on projects ranging from small startups to enterprise-level systems.
+                    I am a passionate undergraduate IT developer who enjoys building efficient and user-friendly applications. 
+                    I focus on creating solutions that are not only functional, but also meaningful and valuable to users
                 </p>
                 <p>
-                    My approach combines technical expertise with a deep understanding of user needs, ensuring that every 
-                    solution I build is not just functional, but truly valuable.
+                    I leverage AI tools as productivity assistants to optimize workflows, explore ideas faster, and support 
+                    problem-solving, while maintaining full control over technical decisions and system design. 
                 </p>
                 <p>
-                    When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, 
-                    or sharing knowledge with the developer community.
+                    I am open-minded, adaptable, and continuously eager to learn and grow in the tech industry. I enjoy exploring 
+                    new technologies, working on personal projects, and improving my skills through hands-on experience and collaboration.
                 </p>
             </div>
             <div class="about-stats">
@@ -610,8 +610,6 @@
             
             <div id="formMessage" class="form-message"></div>
             
-            <!-- OPTION 1: Using Formspree (Recommended - Easy Setup) -->
-            <!-- Replace YOUR_FORM_ID with your actual Formspree form ID after signing up at formspree.io -->
             <form class="contact-form" action="https://formspree.io/f/mnjbjjqo" method="POST" id="contactForm">
                 <div class="form-row">
                     <div class="form-group">
@@ -635,18 +633,6 @@
                 <button type="submit" class="btn btn-primary">Send Message</button>
             </form>
 
-            <!-- INSTRUCTIONS FOR SETUP:
-            
-            To receive form submissions, you need to set up one of these free services:
-            
-            OPTION 1: Formspree (Easiest - Recommended)
-            1. Go to https://formspree.io/
-            2. Sign up for a free account
-            3. Create a new form
-            4. Copy your form ID (looks like: xpznabcd)
-            5. Replace YOUR_FORM_ID in the form action above with your actual ID
-            6. Done! You'll receive emails when someone submits the form
-            -->
         </div>
     </section>
 
@@ -687,15 +673,13 @@
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-        // Form submission handling (for Formspree)
+        // Form submission handling (for Formspree) 
         const form = document.getElementById('contactForm');
         const formMessage = document.getElementById('formMessage');
 
         if (form) {
             form.addEventListener('submit', async function(e) {
-                // If using Formspree, you can add custom handling here
-                // The form will automatically submit to Formspree
-                // You can show a custom success message:
+                
                 e.preventDefault();
                 
                 const formData = new FormData(form);
@@ -729,4 +713,3 @@
     </script>
 </body>
 </html>
-
