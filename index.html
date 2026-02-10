@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryan Frisco Peraira - Developer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --surface: #151515;
+            --text: #e8e8e8;
+            --text-dim: #8a8a8a;
+            --accent: #00ff88;
+            --accent-dim: #00cc6a;
+            --border: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Cursor effect */
+        body::before {
+            content: '';
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(180deg, var(--bg) 0%, transparent 100%);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -0.02em;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(0, 255, 136, 0.03) 100%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-label {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            gap: 1rem;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text);
+            text-decoration: none;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            transition: left 0.3s;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn:hover {
+            color: var(--bg);
+            border-color: var(--accent);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--bg);
+        }
+
+        .btn-primary::before {
+            background: var(--bg);
+        }
+
+        .btn-primary:hover {
+            color: var(--accent);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 8rem 4rem;
+            position: relative;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            color: var(--accent);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 600;
+            margin-bottom: 3rem;
+            letter-spacing: -0.02em;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+        }
+
+        .about-text {
+            font-size: 1rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .stat {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .stat:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .stat-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+        }
+
+        .skill-category {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            transition: all 0.3s;
+        }
+
+        .skill-category:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .skill-category h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.5rem 0;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .skill-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-intro {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            letter-spacing: 0.05em;
+        }
+
+        input,
+        textarea {
+            padding: 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-message {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        .form-message.success {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .form-message.error {
+            background: rgba(255, 68, 68, 0.1);
+            border: 1px solid #ff4444;
+            color: #ff4444;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 4rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            .hero,
+            section {
+                padding: 4rem 2rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">BFP</div>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-label">Undergraduate Student</div>
+            <h1>Bryan Frisco Peraira</h1>
+            <p class="hero-subtitle">
+                Computer Science student seeking apprenticeship opportunities to apply my skills in building modern web applications.
+            </p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-primary">Get in touch</a>
+                <a href="#skills" class="btn">View skills</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="fade-in">
+        <div class="section-label">About Me</div>
+        <h2>Who I am</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    I'm a passionate developer with a focus on creating efficient, scalable, and user-friendly applications. 
+                    With years of experience in the field, I've worked on projects ranging from small startups to enterprise-level systems.
+                </p>
+                <p>
+                    My approach combines technical expertise with a deep understanding of user needs, ensuring that every 
+                    solution I build is not just functional, but truly valuable.
+                </p>
+                <p>
+                    When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, 
+                    or sharing knowledge with the developer community.
+                </p>
+            </div>
+            <div class="about-stats">
+                <div class="stat">
+                    <div class="stat-number">Excellent</div>
+                    <div class="stat-label">Campus Projects</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Commitment</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">Ready</div>
+                    <div class="stat-label">To Learn</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">Eager</div>
+                    <div class="stat-label">For Growth</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="fade-in">
+        <div class="section-label">Expertise</div>
+        <h2>Skills & Technologies</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Frontend</h3>
+                <ul class="skill-list">
+                    <li>React / Next.js</li>
+                    <li>JavaScript</li>
+                    <li>HTML5 / CSS3</li>
+                    <li>Tailwind CSS</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Backend</h3>
+                <ul class="skill-list">
+                    <li>Node.js</li>
+                    <li>Python</li>
+                    <li>PHP</li>
+                    <li>REST APIs</li>
+                    <li>GraphQL</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>DevOps & Tools</h3>
+                <ul class="skill-list">
+                    <li>Git / GitHub</li>
+                    <li>Docker</li>
+                    <li>Linux / Bash</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Other</h3>
+                <ul class="skill-list">
+                    <li>Agile / Scrum</li>
+                    <li>Unit Testing / TDD</li>
+                    <li>System Design</li>
+                    <li>Code Review</li>
+                    <li>Technical Writing</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="fade-in">
+        <div class="section-label">Get In Touch</div>
+        <h2>Let's connect</h2>
+        <div class="contact-content">
+            <p class="contact-intro">
+                Looking for an apprenticeship opportunity? I'm eager to learn and contribute. Feel free to reach out!
+            </p>
+            
+            <div id="formMessage" class="form-message"></div>
+            
+            <!-- OPTION 1: Using Formspree (Recommended - Easy Setup) -->
+            <!-- Replace YOUR_FORM_ID with your actual Formspree form ID after signing up at formspree.io -->
+            <form class="contact-form" action="https://formspree.io/f/mnjbjjqo" method="POST" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="_replyto" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <input type="hidden" name="_subject" value="New message from portfolio!">
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+
+            <!-- INSTRUCTIONS FOR SETUP:
+            
+            To receive form submissions, you need to set up one of these free services:
+            
+            OPTION 1: Formspree (Easiest - Recommended)
+            1. Go to https://formspree.io/
+            2. Sign up for a free account
+            3. Create a new form
+            4. Copy your form ID (looks like: xpznabcd)
+            5. Replace YOUR_FORM_ID in the form action above with your actual ID
+            6. Done! You'll receive emails when someone submits the form
+            -->
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/bryanfrisco" target="_blank">GitHub</a>
+            <a href="https://linkedin.com/in/bryanfrisco" target="_blank">LinkedIn</a>
+            <a href="mailto:bryanfrisco24@gmail.com">Email</a>
+        </div>
+        <p>&copy; 2026 Bryan Frisco Peraira. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Form submission handling (for Formspree)
+        const form = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+
+        if (form) {
+            form.addEventListener('submit', async function(e) {
+                // If using Formspree, you can add custom handling here
+                // The form will automatically submit to Formspree
+                // You can show a custom success message:
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        formMessage.textContent = 'Thank you! Your message has been sent successfully.';
+                        formMessage.className = 'form-message success';
+                        formMessage.style.display = 'block';
+                        form.reset();
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                } catch (error) {
+                    formMessage.textContent = 'Oops! There was a problem sending your message.';
+                    formMessage.className = 'form-message error';
+                    formMessage.style.display = 'block';
+                }
+                
+                
+            });
+        }
+    </script>
+</body>
+</html>
+
